@@ -4,11 +4,11 @@
 {% set spacy_model = "en_core_web_sm" %}
 
 package:
-  name: allennlp
+  name: allennlp-split
   version: {{ version }}
 
 source:
-  - ../../../allennlp
+  path: ../../../allennlp
 
 build:
   number: 0
