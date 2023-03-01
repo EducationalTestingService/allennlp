@@ -165,7 +165,7 @@ class MultiTaskDataLoader(DataLoader):
                 # this loader, you end up with `loader` always referring to the last loader in the
                 # iteration... mypy also doesn't know what to do with this, for some reason I can't
                 # figure out.
-                lambda l=loader: maybe_shuffle_instances(l, self._shuffle)  # type: ignore
+                lambda l=loader: maybe_shuffle_instances(l, self._shuffle)  # type: ignore # noqa: E741
             )
             for key, loader in self._loaders.items()
         }
