@@ -25,6 +25,8 @@
     <br/>
 </p>
 
+⚠️ **NOTICE:** ETS will not be maintaining this library going forward. This fork was created to release a new conda package with the pull requests merged into the main AllenNLP repo after the release of v2.10.1. This conda package can be found on the [ETS conda channel](https://anaconda.org/ETS/allennlp). We will also not be releasing any pip packages.
+
 ⚠️ **NOTICE:** The AllenNLP library is now in maintenance mode. That means we are no longer adding new features or upgrading dependencies. We will still respond to questions and address bugs as they arise up until December 16th, 2022. If you have any concerns or are interested in maintaining AllenNLP going forward, please open an issue on this repository.
 
 AllenNLP has been a big success, but as the field is advancing quickly it's time to focus on new initiatives. We're working hard to make [AI2 Tango](https://github.com/allenai/tango) the best way to organize research codebases. If you are an active user of AllenNLP, here are some suggested alternatives:
