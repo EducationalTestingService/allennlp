@@ -10,6 +10,10 @@ def main():
     latest_torch_version = _get_latest_torch_version()
     torch_version_upper_limit = _get_torch_version_upper_limit()
 
+    print("current_torch_version", current_torch_version)
+    print("latest_torch_version", latest_torch_version)
+    print("torch_version_upper_limit", torch_version_upper_limit)
+
     if current_torch_version < latest_torch_version < torch_version_upper_limit:
         raise RuntimeError(
             f"current torch version {current_torch_version} is behind "
