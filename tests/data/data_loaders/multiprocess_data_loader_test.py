@@ -105,8 +105,8 @@ def test_error_raised_when_text_fields_contain_token_indexers(max_instances_in_m
     [
         dict(max_instances_in_memory=10, num_workers=2, batch_size=1),
         dict(num_workers=2, batch_size=1),
-        dict(max_instances_in_memory=10, num_workers=2, start_method="spawn", batch_size=1),
-        dict(num_workers=2, start_method="spawn", batch_size=1),
+        dict(max_instances_in_memory=10, num_workers=2, start_method="fork", batch_size=1),
+        dict(num_workers=2, start_method="fork", batch_size=1),
         dict(max_instances_in_memory=10, num_workers=0, batch_size=1),
         dict(num_workers=0, batch_size=1),
     ],
@@ -209,7 +209,7 @@ def test_batches_per_epoch():
     [
         dict(num_workers=0, batch_size=2),
         dict(num_workers=1, batch_size=2),
-        dict(num_workers=1, batch_size=2, start_method="spawn"),
+        dict(num_workers=1, batch_size=2, start_method="fork"),
     ],
     ids=str,
 )

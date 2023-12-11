@@ -51,11 +51,11 @@ check-for-cuda :
 
 .PHONY : flake8
 flake8 :
-	flake8 allennlp tests scripts 
+	flake8 allennlp tests scripts
 
 .PHONY : format
 format :
-	black --check allennlp tests scripts 
+	black --check allennlp tests scripts
 
 .PHONY : typecheck
 typecheck :
@@ -65,7 +65,7 @@ typecheck :
 test :
 	pytest --color=yes -v -rf --durations=40 \
 			--cov-config=.coveragerc \
-			--cov=$(SRC) \
+			--cov=$(SRC)d \
 			--cov-report=xml
 
 .PHONY : test-without-checklist

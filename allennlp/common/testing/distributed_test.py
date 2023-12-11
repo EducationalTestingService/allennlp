@@ -75,6 +75,7 @@ def run_distributed_test(
         start_method = kwargs.pop("start_method")
     else:
         start_method = "spawn" if any(x >= 0 for x in device_ids) else "fork"
+    print("HELP", start_method)
     nprocs = world_size = len(device_ids)
     mp.start_processes(
         init_process,

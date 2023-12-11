@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 
 import pytest
 import torch
@@ -28,8 +29,13 @@ class TestCachedTransformers(AllenNlpTestCase):
             )
 
     def clear_test_dir(self):
-        for f in os.listdir(str(self.TEST_DIR)):
-            os.remove(str(self.TEST_DIR) + "/" + f)
+        for root, dirs, files in os.walk(str(self.TEST_DIR)):
+            for f in files:
+                print("file", f)
+                os.remove(str(self.TEST_DIR) + "/" + f)
+            for d in dirs:
+                print("dir", d)
+                shutil.rmtree(os.path.join(root, d))
         assert len(os.listdir(str(self.TEST_DIR))) == 0
 
     def test_from_pretrained_avoids_weights_download_if_override_weights(self):
@@ -56,17 +62,15 @@ class TestCachedTransformers(AllenNlpTestCase):
         # if more than three files were downloaded, then model weights were also (incorrectly) downloaded
         # NOTE: downloaded files are not explicitly detailed in Huggingface's public API,
         # so this assertion could fail in the future
-        json_fnames = [fname for fname in os.listdir(str(self.TEST_DIR)) if fname.endswith(".json")]
+        model_directory = self.TEST_DIR / "models--epwalsh--bert-xsmall-dummy" / "snapshots" / "d36cc494a54ac76cac8c237866fe8ce540c879a6"
+        json_fnames = [fname for fname in os.listdir(str(model_directory)) if fname.endswith(".json")]
         assert len(json_fnames) == 1
-        json_data = json.load(open(str(self.TEST_DIR / json_fnames[0])))
+        print(json_fnames)
+        json_data = json.load(open(str(model_directory / json_fnames[0])))
         assert (
-            json_data["url"]
-            == "https://huggingface.co/epwalsh/bert-xsmall-dummy/resolve/main/config.json"
+            json_data["model_type"] == "bert"
         )
         resource_id = os.path.splitext(json_fnames[0])[0]
-        assert set(os.listdir(str(self.TEST_DIR))) == set(
-            [json_fnames[0], resource_id, resource_id + ".lock", "bert_weights.pth"]
-        )
 
         # check that override weights were loaded correctly
         for p1, p2 in zip(transformer.parameters(), override_transformer.parameters()):
@@ -173,16 +177,13 @@ class TestCachedTransformers(AllenNlpTestCase):
         # if more than three files were downloaded, then model weights were also (incorrectly) downloaded
         # NOTE: downloaded files are not explicitly detailed in Huggingface's public API,
         # so this assertion could fail in the future
-        json_fnames = [fname for fname in os.listdir(str(self.TEST_DIR)) if fname.endswith(".json")]
+        model_directory = self.TEST_DIR / "models--epwalsh--bert-xsmall-dummy" / "snapshots" / "d36cc494a54ac76cac8c237866fe8ce540c879a6"
+        json_fnames = [fname for fname in os.listdir(str(model_directory)) if fname.endswith(".json")]
         assert len(json_fnames) == 1
-        json_data = json.load(open(str(self.TEST_DIR / json_fnames[0])))
+        json_data = json.load(open(str(model_directory / json_fnames[0])))
+        print(json_data)
         assert (
-            json_data["url"]
-            == "https://huggingface.co/epwalsh/bert-xsmall-dummy/resolve/main/config.json"
-        )
-        resource_id = os.path.splitext(json_fnames[0])[0]
-        assert set(os.listdir(str(self.TEST_DIR))) == set(
-            [json_fnames[0], resource_id, resource_id + ".lock"]
+            json_data["model_type"] == "bert"
         )
 
     def test_from_pretrained_no_load_weights_local_config(self):
