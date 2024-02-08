@@ -14,11 +14,3 @@ protobuf<4.0.0
 
 # Required so pip-compile can properly resolve the pydantic version
 inflect<6.0
-
-##################################################
-###### Extra dependencies for integrations #######
-##################################################
-# NOTE: we use a special trailing comment on each line to denote which extras
-# each package is needed by. For example, checklist is needed by the 'checklist' extra
-# that you install with 'pip install allennlp[checklist]'.
-checklist==0.0.11  # needed by: checklist
