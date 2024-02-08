@@ -1,4 +1,5 @@
 #### TESTING-RELATED PACKAGES ####
+notebook==6.0.1
 
 # Checks style, syntax, and other useful errors.
 flake8>=4.0.1
