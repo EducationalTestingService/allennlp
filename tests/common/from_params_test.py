@@ -341,7 +341,7 @@ class TestFromParams(AllenNlpTestCase):
         for expected_type, param_str in [(int, int_param_str), (float, float_param_str)]:
             for cls in [IntFloat, FloatInt]:
                 c = cls.from_params(Params(json.loads(param_str)))
-                assert type(c.a) == expected_type
+                assert type(c.a) == expected_type  # noqa
 
     def test_invalid_type_conversions(self):
         class A(FromParams):
@@ -675,7 +675,7 @@ class TestFromParams(AllenNlpTestCase):
         assert instance.x == 42
         assert instance.a == -1
         assert len(instance.rest) == 1
-        assert type(instance.rest["raw_a"]) == str
+        assert type(instance.rest["raw_a"]) == str  # noqa
         assert instance.rest["raw_a"] == "123"
 
     def test_kwargs_are_passed_to_deeper_superclasses(self):

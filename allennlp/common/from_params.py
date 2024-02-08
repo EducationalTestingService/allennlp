@@ -363,7 +363,7 @@ def construct_arg(
             raise TypeError(f"Expected {argument_name} to be a {annotation.__name__}.")
     elif annotation == str:
         # Strings are special because we allow casting from Path to str.
-        if type(popped_params) == str or isinstance(popped_params, Path):
+        if type(popped_params) == str or isinstance(popped_params, Path):  # noqa
             return str(popped_params)  # type: ignore
         else:
             raise TypeError(f"Expected {argument_name} to be a string.")

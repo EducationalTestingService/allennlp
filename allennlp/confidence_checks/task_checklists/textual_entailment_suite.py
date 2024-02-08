@@ -21,9 +21,9 @@ def _wrap_apply_to_each(perturb_fn: Callable, both: bool = False, *args, **kwarg
         ret = []
         fn_premise = perturb_fn(premise, *args, **kwargs)
         fn_hypothesis = perturb_fn(hypothesis, *args, **kwargs)
-        if type(fn_premise) != list:
+        if type(fn_premise) != list:  # noqa
             fn_premise = [fn_premise]
-        if type(fn_hypothesis) != list:
+        if type(fn_hypothesis) != list:  # noqa
             fn_hypothesis = [fn_hypothesis]
         ret.extend([(x, str(hypothesis)) for x in fn_premise])
         ret.extend([(str(premise), x) for x in fn_hypothesis])
