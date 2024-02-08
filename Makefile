@@ -51,11 +51,11 @@ check-for-cuda :
 
 .PHONY : flake8
 flake8 :
-	flake8 allennlp tests scripts 
+	flake8 allennlp tests scripts
 
 .PHONY : format
 format :
-	black --check allennlp tests scripts 
+	black --check allennlp tests scripts
 
 .PHONY : typecheck
 typecheck :
@@ -117,6 +117,7 @@ install :
 	pip install pip-tools
 	pip-compile requirements.in -o final_requirements.txt --allow-unsafe --rebuild --verbose
 	pip install -e . -r final_requirements.txt
+	pip install checklist --upgrade-strategy only-if-needed
 	# These nltk packages are used by the 'checklist' module.
 	$(NLTK_DOWNLOAD_CMD)
 
