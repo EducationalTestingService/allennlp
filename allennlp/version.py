@@ -1,7 +1,7 @@
 import os
 
 _MAJOR = "2"
-_MINOR = "10"
+_MINOR = "11"
 # On main and in a nightly release the patch should be one ahead of the last
 # released build.
 _PATCH = "1"
