@@ -159,7 +159,7 @@ jobs:
         ALLENNLP_VERSION_OVERRIDE: ""  # Don't replace the core library.
       run: |
         source .venv/bin/activate
-        git clone https://github.com/allenai/allennlp-models.git
+        git clone https://github.com/EducationalTestingService/allennlp-models.git
         cd allennlp-models
         # git checkout dependabot/pip/torch-gte-1.7.0-and-lt-1.13.0
         pip install -e .[dev,all]
@@ -232,4 +232,3 @@ jobs:
         # in the github UI just because the coverage report failed to
         # be published.
         fail_ci_if_error: false
-

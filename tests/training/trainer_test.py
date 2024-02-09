@@ -1401,6 +1401,7 @@ class TestAmpTrainer(TrainerTestBase):
         )
         _ = trainer.train()
 
+
 # NOTE: this test stopped working with pytorch 1.13.1 because the behavior of
 # `clip_grad_norm_` changed for sparse tensors. This is mainly because of the
 # the last two lines in the code for `clip_grad_norm_` in pytorch 1.13.1.
