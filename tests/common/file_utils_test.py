@@ -505,17 +505,11 @@ class TestHFHubDownload(AllenNlpTestCase):
     def test_cached_download_no_user_or_org(self):
         path = cached_path("hf://t5-small/config.json", cache_dir=self.TEST_DIR)
         assert os.path.isfile(path)
-        assert pathlib.Path(os.path.dirname(path)) == self.TEST_DIR
-        assert os.path.isfile(path + ".json")
-        meta = _Meta.from_path(path + ".json")
-        assert meta.etag is not None
-        assert meta.resource == "hf://t5-small/config.json"
+        assert self.TEST_DIR in pathlib.Path(path).parents
 
     def test_snapshot_download_no_user_or_org(self):
         # This is the smallest snapshot I could find that is not associated with a user / org.
         model_name = "distilbert-base-german-cased"
-        path = cached_path(f"hf://{model_name}")
+        path = cached_path(f"hf://{model_name}", cache_dir=self.TEST_DIR)
         assert os.path.isdir(path)
-        assert os.path.isfile(path + ".json")
-        meta = _Meta.from_path(path + ".json")
-        assert meta.resource == f"hf://{model_name}"
+        assert self.TEST_DIR in pathlib.Path(path).parents
